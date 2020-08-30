@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>QED Admin - Manage Badges</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+<!--    <link rel="stylesheet" href="css/badge.css">-->
+    <link rel="stylesheet" href="css/datatable.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+    <div class="row">
+        <div class="col-4 form-div">
+            <h5>Manage Badges</h5>
+
+            <table width="100%" class="form-table">
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Name
+                    </td>
+                    <td>
+                        <input id="badge-name-input" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+
+                    <td class="label">
+                        From
+                    </td>
+                    <td>
+                        <input id="badge-max-input" type="number" class="form-control" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        To
+                    </td>
+                    <td>
+                        <input id="badge-min-input" type="number" class="form-control" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Kpi
+                    </td>
+                    <td>
+                        <select id="kpi-select" class="form-control">
+                            <option>Select kpi</option>
+                            <option>Consistent Performane</option>
+                            <option>Aggregate</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Description
+                    </td>
+                    <td>
+                        <input id="description-input" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Badge</td>
+                    <td>
+                        <button id="badge-upload-btn" class="btn">Upload Badge</button>
+                        <img id="badge-preview" src="" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td>
+                        <button id="submit-btn" class="btn">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <input id="badge-image-input" type="file" class="form-control" onchange="previewFile()" style="display: none;">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/badges.js" ></script>
+    <script type="text/javascript" src="js/datatable.js"></script>
+</body>
+</html>

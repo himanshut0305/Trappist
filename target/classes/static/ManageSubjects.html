@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>QED - Content Management</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="row">
+        <div class="col-4 form-div">
+            <h5>Manage Subjects</h5>
+
+            <table width="100%" class="form-table">
+                <tr>
+                    <td class="label">
+                        Group
+                    </td>
+                    <td>
+                        <select id="subject-group" class="form-control">
+                            <option disabled selected>Select Group</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 54px;">
+                    <td class="label">
+                        Name
+                    </td>
+                    <td>
+                        <input id="subject-name" type="text" class="form-control" />
+                    </td>
+                </tr>
+            </table>
+            <button id="submit" class="btn float-right form-btn">Create</button>
+            <button id="update" class="btn float-right form-btn">Update</button>
+        </div>
+        <div class="col-8 table-div">
+            <table id="subject-group-table" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Group</th>
+                    <th width="6%"></th>
+                    <th width="6%"></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/datatable.js"></script>
+
+    <script>
+        var table;
+        $(document).ready(function() {
+            initializePage({role: "ROLE_SUPER_ADMIN", onComplete: getData});
+        });
+
+        var getData = function getData() {
+            getSubjects();
+            getSubjectGroups();
+        }
+
+        var getSubjects = function getSubjects() {
+            sendAuthorisedRequest({
+                url: "/api/get/subjects",
+                onSuccess: function(data){
+                    renderTable(data);
+                    console.log(data);
+
+                    $(".loading-overlay-div").hide();
+                },
+                onError: function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        var getSubjectGroups = function getSubjectGroups() {
+            sendAuthorisedRequest({
+                url: "/api/get/subjectGroups",
+                onSuccess: function(data){
+                    data = JSON.parse(data);
+                    var length = data.length;
+
+                    for(var i = 0; i < length; i++) {
+                        $("#subject-group").append("<option value='" + data[i].id + "'>" + data[i].name + "</option>")
+                    }
+                },
+                onError: function(error){
+                    console.log(error);
+                }
+            });
+        }
+
+        $("#submit").on("click", function() {
+            var subjectName = $("#subject-name").val();
+            var subjectGroupId = $("#subject-group").val();
+
+            var data = { name: subjectName, subjectGroupId: subjectGroupId};
+
+            console.log(data);
+            sendAuthorisedPostRequest({
+                url: "/api/save/subject",
+                data: data,
+                onSuccess: function(response){
+                    table.destroy();
+                    getSubjects();
+                },
+                onError: function(error){
+                    console.log(error);
+                }
+            });
+        });
+
+        function renderTable(data) {
+            table = $('#subject-group-table').DataTable({
+			    	"processing": true,
+			        "data": JSON.parse(data),
+			        "order": [[ 0, 'asc' ]],
+			        "columns": [
+			            { "data": "name" },
+			            { "data": "subjectGroup.name" },
+			            {
+			                "orderable":      false,
+			                "data":           null,
+			                "defaultContent": "<i class='material-icons edit' style='cursor: pointer;'>edit</i>"
+			            },
+			            {
+			                "orderable":      false,
+			                "data":           null,
+			                "defaultContent": "<i class='material-icons delete' style='cursor: pointer;'>delete</i>"
+			            }
+                    ]
+			    });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QED Admin - Link Topics</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+    <style>
+        .q-inp {
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="row" style="margin-top: 24px;">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <select id="school-year-select" class="form-control">
+                <option value="0" disabled selected>Select Class</option>
+            </select>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <select id="subject-group-select" class="form-control">
+                <option value="0" disabled selected>Choose Subject Group</option>
+            </select>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <select id="subject-select" disabled class="form-control">
+                <option value="0" disabled selected>Select Subject</option>
+            </select>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 24px;">
+        <div class="col-lg-3">
+            <select id="book-select" class="form-control q-inp" disabled>
+                <option value="0" disabled selected>Select Book</option>
+            </select>
+            <select id="book-chapter-select" class="form-control q-inp" disabled>
+                <option value="0" disabled selected>Select Book Chapter</option>
+            </select>
+            <select id="book-topic-select" class="form-control q-inp" disabled>
+                <option value="0" disabled selected>Select Book Topic</option>
+            </select>
+        </div>
+        <div id="link-box" class="col-lg-6 link-box">
+
+        </div>
+        <div class="col-lg-3">
+            <select id="chapter-select" class="form-control q-inp" disabled>
+                <option value="0" disabled selected>Select Chapter</option>
+            </select>
+            <select id="topic-select" class="form-control q-inp" disabled>
+                <option value="0" disabled selected>Select Topic</option>
+            </select>
+            <button id="link-topics-btn" class="btn q-inp">Link to Book Topic</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/katex.js" ></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/common.js" ></script>
+    <script type="text/javascript" src="js/linkTopics.js" ></script>
+</body>
+</html>

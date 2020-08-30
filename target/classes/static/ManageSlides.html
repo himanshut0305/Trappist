@@ -1,0 +1,205 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QED Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/katex.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+<div class="loading-overlay-div">
+    <div class="spinner"></div>
+</div>
+<div id="notification" class="slide-notification alert alert-danger" style="display: none;">
+    <p id="notification-heading" class="notification-heading">Notification</p>
+    <p id="notification-text" class="notification-text"></p>
+</div>
+<div class="row header">
+    <div class="col-12" style="text-align: center; display: flex; flex-direction: row; justify-content: space-between; padding: 0px;">
+        <div id="previous-slide-btn" class="navigation-btn" tabindex="10">
+            <i class="material-icons" style="float: left; line-height: 1.4; margin-right: 15px;">arrow_back</i>
+            Previous Slide
+        </div>
+        <p><span id="topic-name"></span> - Slide <span id="slide-index"></span></p>
+        <div id="next-slide-btn" class="navigation-btn" tabindex="10">
+            Next Slide
+            <i class="material-icons" style="float: right; line-height: 1.4; margin-left: 15px;">arrow_forward</i>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 content-form">
+        <div class="row" style="padding-top : 24px;">
+            <div class="col-lg-12" style="padding: 0px;">
+                <input id="preface-input" class="form-control" type="text" name="preface" tabindex="1" placeholder="Preface" />
+            </div>
+            <div class="col-lg-12 shortcuts-div">
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="<b></b>" data-offset="4">B</button>
+                <button title="Highlight" class="btn shortcut-btn" data-insert-text="<font color='#EE0000'></font>" data-offset="7">H</button>
+                <button title="Formula" class="btn shortcut-btn" data-insert-text="<formula></formula>" data-offset="10">F</button>
+                <button title="New Line" class="btn shortcut-btn" data-insert-text="<br>" data-offset="0">N</button>
+
+                <div class="separator"></div>
+
+                <button title="Square root" class="btn shortcut-btn" data-insert-text="\sqrt{x}" data-offset="0">&#x221a;</button>
+                <button title="Cube root" class="btn shortcut-btn" data-insert-text="\sqrt[3]{x}" data-offset="0">&#8731;</button>
+                <button title="Differentiation" class="btn shortcut-btn" data-insert-text="\cfrac{d}{dx} (x)" data-offset="0">&#8706;</button>
+
+                <button title="Integration" class="btn shortcut-btn" data-insert-text="\int_{n}^{2n} (x)" data-offset="0">&int;</button>
+                <button title="Summation" class="btn shortcut-btn" data-insert-text="\sum_{x \to y}^{x} (x)" data-offset="0">&Sigma;</button>
+                <button title="Limit" class="btn shortcut-btn" data-insert-text="\lim_{x \to y} (x)" data-offset="0">&esdot;</button>
+
+                <button title="Fraction" class="btn shortcut-btn" data-insert-text="\cfrac{a}{b}" data-offset="0">/</button>
+                <button title="Multiplication" class="btn shortcut-btn" data-insert-text="\times" data-offset="0">&times;</button>
+                <button title="Implies that" class="btn shortcut-btn" data-insert-text="\implies" data-offset="0">&rArr;</button>
+
+                <button title="Matrix" class="btn shortcut-btn" data-insert-text="&#xa;\begin{matrix} &#xa; a & b \\ &#xa; c & d &#xa; \end{matrix} &#xa;" data-offset="0">[ ]</button>
+                <button title="Proof" class="btn shortcut-btn" data-insert-text="&#xa;\begin{aligned} &#xa; f(x)&=x+1 \\ &#xa; \implies f(2)&=2+1 \\ &#xa; &=3 &#xa; \end{aligned}&#xa;" data-offset="0">P</button>
+
+                <div class="separator"></div>
+
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\pi" data-offset="0">&pi;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\theta" data-offset="0">&theta;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\delta" data-offset="0">&delta;</button>
+
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\sigma" data-offset="0">&sigma;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\lambda" data-offset="0">&lambda;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\infty" data-offset="0">&infin;</button>
+            </div>
+            <div class="col-lg-12 rtb-div" style="padding: 0 0 12px 0;">
+                <textarea id="explanation-input" class="form-control rich-text-box" tabindex="2" rows="8"></textarea>
+            </div>
+        </div>
+
+        <button id="add-point-btn" class="btn add-btn" tabindex="3" data-brother="remove-point" data-type="POINT" data-ally="point-2">
+            <i class="material-icons">add</i>
+            Add point
+        </button>
+        <button id="remove-point-btn" class="btn remove-btn" tabindex="3" data-brother="add-point" data-ally="point-2">
+            <i class="material-icons">remove</i>
+            Remove point
+        </button>
+
+        <button id="add-reveal-interaction-btn" class="btn add-btn" tabindex="4" data-brother="remove-reveal-interaction" data-type="RI" data-ally="reveal-interaction">
+            <i class="material-icons">view_stream</i>
+            Add Reveal
+        </button>
+        <button id="remove-reveal-interaction-btn" class="btn remove-btn" tabindex="4" data-brother="add-reveal-interaction" data-ally="reveal-interaction">
+            <i class="material-icons">remove</i>
+            Remove Reveal
+        </button>
+
+        <button id="add-confirm-interaction-btn" class="btn add-btn" tabindex="5" data-brother="remove-confirm-interaction" data-type="CI" data-ally="confirm-interaction">
+            <i class="material-icons">check</i>
+            Add Confirm
+        </button>
+        <button id="remove-confirm-interaction-btn" class="btn remove-btn" tabindex="5" data-brother="add-confirm-interaction" data-ally="confirm-interaction">
+            <i class="material-icons">remove</i>
+            Remove Confirm
+        </button>
+
+        <button id="diagram-upload-btn" class="btn add-btn" tabindex="6" data-brother="diagram-remove" data-type="DIG" data-ally="diagram">
+            <i class="material-icons">add_photo_alternate</i>
+            Add Diagram
+        </button>
+        <button id="diagram-remove-btn" class="btn remove-btn" data-brother="diagram-upload" tabindex="6" data-ally="diagram">
+            <i class="material-icons">remove</i>
+            Remove Diagram
+        </button>
+        <button id="submit-slide-btn" class="waiter-btn-blue btn btn-primary" tabindex="8" style="font-weight: bold; width: 150px; float: right;">
+            <i class="material-icons">save</i>
+            Save
+        </button>
+        <button id="add-question-btn" class="btn btn-secondary" tabindex="7" style="font-weight: bold; float: right; margin-right: 4px; width: 150px;">
+            <i class="material-icons">help_outline</i>
+            Add Question
+        </button>
+
+        <div style="margin-top: 10px; height: 34px;">
+            <button id="insert-slide-before-btn" class="waiter-btn-grey btn" tabindex="10" style="float: left;">
+                <i class="material-icons">keyboard_arrow_left</i>
+                Insert Slide Before
+            </button>
+
+            <button id="insert-slide-after-btn" class="waiter-btn-grey btn" tabindex="11" style="margin-left: 4px; float: left;">
+                Insert Slide After
+                <i class="material-icons" style="float: right; margin-left: 12px; margin-right: 0;">keyboard_arrow_right</i>
+            </button>
+            <select id="skip-to-slide" class="form-control" style="width: 120px; margin-left: 4px; float: left; margin-bottom: 12px;">
+                <option>Skip to Slide</option>
+            </select>
+
+            <button id="delete-slide-btn" class="waiter-btn-red btn btn-danger" tabindex="11" style="float: right; margin-left: 4px; width: 50px; font-weight: bold;">
+                <i class="material-icons">delete</i>
+            </button>
+            <button id="finish-topic-btn" class="btn btn-danger" tabindex="10" style="color: white; float: right; margin: auto; width: 150px; font-weight: bold;">
+                <i class="material-icons">last_page</i>
+                Finish Topic
+            </button>
+        </div>
+        <div style="margin-top: 12px; position: relative;">
+            <button id="add-comment-btn" class="form-control">See Comments</button>
+            <p id="previous-comment-input" class="form-control" style=" display: none; resize: none; padding: 6px 10px !important; height: 140px; background: #f6f6f8; overflow-y: auto;"></p>
+            <textarea id="new-comment-input" class="form-control" rows="6" style="resize: none; padding: 6px 10px !important;"></textarea>
+        </div>
+        <input id="diagram-input" type="file" class="form-control" onchange="previewFile()" style="display: none;">
+
+        <div style="margin-top: 10px;">
+            <p style="font-family: 'Inconsolata', monospace; margin: 0px;"><b>Created By : </b><span id="creator-name"></span></p>
+            <p style="font-family: 'Inconsolata', monospace; margin: 0px;"><b>Last Reviewed By : </b><span id="reviewer-name"></span></p>
+        </div>
+    </div>
+    <div class="col-lg-4 preview">
+        <div class="device">
+            <div class="device-screen">
+                <div class="progress-bar"></div>
+                <div class="progress-bar-overlay"></div>
+
+                <div id="point-1-div" class="" onclick="focusFirstPoint();">
+                    <p id="preface-1" class="preface"></p>
+                    <p id="explanation-1" class="explanation"></p>
+                </div>
+
+                <div id="point-2-div" class="element" onclick="focusSecondPoint();">
+                    <p id="preface-2" class="preface"></p>
+                    <p id="explanation-2" class="explanation"></p>
+                </div>
+
+                <div id="reveal-interaction-div" class="element" onclick="focusRevealInteraction();">
+                    <p id="reveal-interaction-question" class="preface"></p>
+                    <p id="reveal-interaction-answer" class="explanation ri-answer"></p>
+                </div>
+
+                <div id="confirm-interaction-div" class="element" onclick="focusConfirmInteraction();">
+                    <p id="confirm-interaction-question" class="preface"></p>
+                    <button class="btn btn-danger" style="margin-left: 45px; width: 80px;">Yes</button>
+                    <button class="btn btn-danger" style="float: right; margin-right: 45px; width: 80px;">No</button>
+                </div>
+
+                <div id="diagram-div" class="element" onclick="focusDiagram();">
+                    <div id="preview-div" style="height: 180px; width: 100%; padding : 12px;">
+                        <img id="preview" src="" accept="image/gif, image/jpeg, image/png" style="max-height: 100%; width: auto; max-width: 100%; margin: auto;">
+                    </div>
+                    <p id="diagram-caption" class="preface">Caption</p>
+                </div>
+                <button class="btn continue">CONTINUE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/katex.js" ></script>
+<script type="text/javascript" src="js/server-request.js" ></script>
+<script type="text/javascript" src="js/initialise.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<script type="text/javascript" src="js/manageSlides.js" ></script>
+</body>
+</html>

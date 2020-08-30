@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>QED - Content Management</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+    <div class="row">
+        <div class="col-4 form-div">
+            <h5>Manage Book Topic</h5>
+
+            <table width="100%" class="form-table">
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Class
+                    </td>
+                    <td width="75%">
+                        <select id="school-year-select" class="form-control">
+                            <option disabled selected>Select Class</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Book
+                    </td>
+                    <td>
+                        <select id="book-select" class="form-control">
+                            <option disabled selected>Select Book</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Chapter
+                    </td>
+                    <td>
+                        <select id="book-chapter-select" class="form-control">
+                            <option disabled selected>Select Chapter</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Name
+                    </td>
+                    <td>
+                        <input id="book-topic-name-input" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Index
+                    </td>
+                    <td>
+                        <input id="book-topic-index-input" type="number" min="1" max="50" class="form-control" />
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">
+                        Description
+                    </td>
+                    <td>
+                        <input id="book-topic-description" type="text" class="form-control" />
+                    </td>
+                </tr>
+            </table>
+            <button id="submit" class="btn float-right form-btn">Create</button>
+            <button id="cancel-edit-btn" class="btn float-right form-btn" style="display: none;">Cancel</button>
+            <button id="update" class="btn float-right form-btn" style="display: none;">Update</button>
+        </div>
+        <div class="col-8 table-div">
+            <table id="book-topic-table" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th width="5%">#</th>
+                    <th width="36%">Name</th>
+                    <th>Chapter</th>
+                    <th>Book</th>
+                    <th width="5%"></th>
+                    <th width="5%"></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/datatable.js"></script>
+    <script type="text/javascript" src="js/topicBookChapter.js"></script>
+    <script type="text/javascript" src="js/bookTopic.js"></script>
+</body>
+</html>

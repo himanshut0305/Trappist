@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QED - User Management</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+<div id="header"></div>
+
+<div class="row">
+    <div class="col-4 form-div">
+        <h5>Manage Students</h5>
+
+        <table width="100%" class="form-table">
+            <tr style="height: 45px;">
+                <td class="label">Board</td>
+                <td width="75%">
+                    <select id="school-board-select" class="form-control">
+                        <option value="0" selected disabled>Select Board</option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td class="label">Group</td>
+                <td>
+                    <select id="school-chain-select" class="form-control">
+                        <option value="0" selected disabled>Select School Group</option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td class="label">School</td>
+                <td>
+                    <select id="school-select" class="form-control">
+                        <option value="0" selected disabled>Select School</option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td class="label">Class</td>
+                <td>
+                    <select id="school-class-select" class="form-control">
+                        <option value="0" selected disabled>Select Class</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr style="height: 45px;">
+                <td class="label">
+                    Name
+                </td>
+                <td>
+                    <input id="name-input" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td class="label">
+                    Roll No.
+                </td>
+                <td>
+                    <input id="roll-no-input" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td class="label">
+                    Admission No.
+                </td>
+                <td>
+                    <input id="admission-no-input" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr style="height: 45px;">
+                <td class="label">
+                    Email
+                </td>
+                <td>
+                    <input id="email-input" type="text" class="form-control" />
+                </td>
+            </tr>
+        </table>
+        <button id="submit" class="btn float-right form-btn">Create</button>
+        <button id="update" class="btn float-right form-btn">Update</button>
+    </div>
+    <div class="col-8 table-div">
+        <table id="student-table" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Class</th>
+                <th>Email</th>
+                <th width="6%"></th>
+                <th width="6%"></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/server-request.js" ></script>
+<script type="text/javascript" src="js/initialise.js" ></script>
+<script type="text/javascript" src="js/datatable.js"></script>
+<script type="text/javascript" src="js/manageStudents.js"></script>
+
+<script>
+        <!--$(document).ready(function() {-->
+            <!--initializePage({role: "ROLE_SUPER_ADMIN", onComplete: getUsers});-->
+        <!--});-->
+
+        <!--var getUsers = function getUsers() {-->
+            <!--sendAuthorisedRequest({-->
+                <!--url: "/api/get/users",-->
+                <!--onSuccess: function(data){-->
+                    <!--data = JSON.parse(data);-->
+                    <!--console.log(data);-->
+                    <!--renderTable(data);-->
+
+                    <!--$(".loading-overlay-div").hide();-->
+                <!--},-->
+                <!--onError: function(error){-->
+                    <!--console.log(error);-->
+                <!--}-->
+            <!--});-->
+        <!--}-->
+
+        <!--$("#submit").on("click", function() {-->
+            <!--var name = $("#name-input").val();-->
+            <!--var username = $("#username-input").val();-->
+            <!--var email =  $("#email-input").val();-->
+            <!--var password =  $("#password-input").val();-->
+            <!--var role = $("#role-select").val();-->
+
+            <!--var data = {-->
+                <!--name: name,-->
+                <!--username: username,-->
+                <!--email: email,-->
+                <!--password: password,-->
+                <!--role: role-->
+            <!--};-->
+
+            <!--console.log(data);-->
+            <!--sendAuthorisedPostRequest({-->
+                <!--url: "/api/auth/registerUser",-->
+                <!--data: data,-->
+                <!--onSuccess: function(response){-->
+                    <!--table.destroy();-->
+                    <!--getUsers();-->
+                <!--},-->
+                <!--onError: function(error){-->
+                    <!--console.log(error);-->
+                <!--}-->
+            <!--});-->
+        <!--});-->
+    </script>
+</body>
+</html>

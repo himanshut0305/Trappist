@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QED Admin</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/toc.css">
+</head>
+<body>
+    <div id="chapter-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 36vh; margin-top: 32vh;">
+            <div class="col-4 offset-4 card create-book-form" style="padding: 20px;">
+                <h3>Create Chapter</h3>
+                <input type="text" class="form-control" placeholder="Name">
+                <input type="number" class="form-control" placeholder="Index">
+
+                <button class="btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="book-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 45vh; margin-top: 27.5vh;">
+            <div class="col-4 offset-4 card create-book-form" style="padding: 20px;">
+                <h3>Create Book</h3>
+                <input type="text" class="form-control" placeholder="Name">
+                <input type="text" class="form-control" placeholder="Publisher">
+                <input type="text" class="form-control" placeholder="Edition">
+
+                <button class="btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row header">
+        <div class="col-4">Create TOC</div>
+        <div class="col-8" style="text-align: right;">
+            Logout
+        </div>
+    </div>
+
+    <div class="row" style="padding-top: 15px;">
+        <div class="col-3">
+            <select class="form-control">
+                <option value="-1" selected disabled>Select Class</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+            </select>
+            <select class="form-control" style="margin-top: 12px;">
+                <option value="-1" selected disabled>Select Subject</option>
+                <optgroup label="Science">
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="biology">Biology</option>
+                    <option value="evs">Environmental Science</option>
+                </optgroup>
+                <optgroup label="Social Science">
+                    <option value="history">History</option>
+                    <option value="civics">Civics</option>
+                    <option value="geography">Geography</option>
+                    <option value="economics">Economics</option>
+                </optgroup>
+                <optgroup label="English">
+                    <option value="prose">Prose</option>
+                    <option value="poetry">Poetry</option>
+                    <option value="drama">Drama</option>
+                    <option value="grammar">Grammar</option>
+                </optgroup>
+                <option value="maths">Mathematics</option>
+                <option value="hindi">Hindi</option>
+                <option value="computers">Information Technology</option>
+
+            </select>
+            <select class="form-control" id="book-select" style="margin-top: 12px;">
+                <option value="-1" selected disabled>Select Book</option>
+                <option value="1">NCERT Physics - 9th</option>
+                <option value="0">Create Book</option>
+            </select>
+            <select class="form-control" id="chapter-select" style="margin-top: 12px;">
+                <option value="-1" selected disabled>Select Chapter</option>
+                <option value="1">Chapter 1 - Motion</option>
+                <option value="0">Create Chapter</option>
+            </select>
+        </div>
+        <div class="col-9 tree">
+            <div class="chapter-header">
+                <span id="chapter-heading-1" class="chapter-heading" data-index="1" style="cursor: pointer;">Chapter 1 : Motion</span>
+                <button class="btn float-right"><i class="fa fa-edit"></i></button>
+                <button class="btn float-right"><i class="fa fa-trash"></i></button>
+            </div>
+            <div id="topics-1" style="width: 100%;">
+                <div style="margin: 24px 36px;">
+                    <div class="show-topic clearfix">
+                        <span>Topic 1</span>
+                        <button class="btn float-right"><i class="fa fa-plus"></i></button>
+                        <button class="btn float-right edit-topic-btn" data-topic-id="1" data-chapter-id="1"><i class="fa fa-edit"></i></button>
+                        <button class="btn float-right"><i class="fa fa-trash"></i></button>
+                        <button class="btn float-right"><i class="fa fa-arrow-up"></i></button>
+                        <button class="btn float-right"><i class="fa fa-arrow-down"></i></button>
+                    </div>
+                    <div id="edit-topic-11 clearfix" class="edit-topic" style="display: none;">
+                        <input type="text" class="form-control" style="width: 300px; display: inline-block;">
+                        <button class="btn btn-primary float-right">Update</button>
+                    </div>
+                    <div class="add-topic-or-qpt clearfix" style="margin-top: 12px;">
+                        <input type="text" class="form-control float-left" placeholder="Topic Name" style="width: 300px; display: inline-block;">
+                        <select class="form-control float-left" style="width: 300px; margin-left: 15px; display: inline-block;">
+                            <option value="-1" selected disabled>Select Tpye</option>
+                            <option value="topic">Topic</option>
+                            <option value="qpt">QPT</option>
+                        </select>
+                        <button class="btn btn-primary float-right">Create</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="topic-div" style="margin: 24px 36px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="parent-node-template">
+
+    </template>
+
+    <template id="child-node-template">
+
+    </template>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/toc.js" ></script>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+</html>

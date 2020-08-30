@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>QED Admin</title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/katex.css">
+        <link rel="stylesheet" href="css/mobileSlide.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row header" style="">
+            <div class="col-12" style="text-align: center;"> <span id="topic-name"></span> - Slide <span id="slide-index"></span> </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 preview">
+                <div class="device">
+                    <div class="device-screen">
+                        <div id="point-1-div" class="" onclick="focusFirstPoint();">
+                            <p id="preface-1" class="preface"></p>
+                            <p id="explanation-1" class="explanation"></p>
+                        </div>
+
+                        <div id="point-2-div" class="element" onclick="focusSecondPoint();">
+                            <p id="preface-2" class="preface"></p>
+                            <p id="explanation-2" class="explanation"></p>
+                        </div>
+
+                        <div id="reveal-interaction-div" class="element" onclick="focusRevealInteraction();">
+                            <p id="reveal-interaction-question" class="preface"></p>
+                            <p id="reveal-interaction-answer" class="explanation ri-answer"></p>
+                        </div>
+
+                        <div id="confirm-interaction-div" class="element" onclick="focusConfirmInteraction();">
+                            <p id="confirm-interaction-question" class="preface"></p>
+                            <button class="btn btn-danger" style="margin-left: 45px; width: 80px;">Yes</button>
+                            <button class="btn btn-danger" style="float: right; margin-right: 45px; width: 80px;">No</button>
+                        </div>
+
+                        <div id="DIG-div" class="element" onclick="focusDiagram();">
+                            <div id="preview-div" style="height: 180px; width: 100%; padding : 12px;">
+                                <img id="preview" src="" accept="image/gif, image/jpeg, image/png" style="max-height: 100%; width: auto; max-width: 100%; margin: auto;">
+                            </div>
+                            <p id="DIG-caption" class="preface">Caption</p>
+                        </div>
+                    </div>
+                    <div id="preface-input-div" class="col-lg-12 input-div">
+                        <input id="preface-input" class="form-control" type="text" name="preface" tabindex="1" placeholder="Preface" />
+                    </div>
+
+                    <div id="explanation-input-div" class="col-lg-12 input-div">
+                        <input id="explanation-input" class="form-control" tabindex="2" placeholder="Explanation" />
+                    </div>
+
+                    <div class="action-buttons">
+                        <div class="first-action-buttons">
+                            <button id="add-point-btn" class="btn add-btn" tabindex="3" data-brother="remove-point" data-type="POINT" data-ally="point-2">
+                                <i class="material-icons">add</i>
+                            </button>
+                            <button id="remove-point-btn" class="btn remove-btn" tabindex="3" data-brother="add-point" data-ally="point-2">
+                                <i class="material-icons">remove</i>
+                            </button>
+
+                            <button id="add-reveal-interaction-btn" class="btn add-btn" tabindex="4" data-brother="remove-reveal-interaction" data-type="RI" data-ally="reveal-interaction">
+                                <i class="material-icons">view_stream</i>
+                            </button>
+                            <button id="remove-reveal-interaction-btn" class="btn remove-btn" tabindex="4" data-brother="add-reveal-interaction" data-ally="reveal-interaction">
+                                <i class="material-icons">remove</i>
+                            </button>
+
+                            <button id="add-confirm-interaction-btn" class="btn add-btn" tabindex="5" data-brother="remove-confirm-interaction" data-type="CI" data-ally="confirm-interaction">
+                                <i class="material-icons">playlist_add_check</i>
+                            </button>
+                            <button id="remove-confirm-interaction-btn" class="btn remove-btn" tabindex="5" data-brother="add-confirm-interaction" data-ally="confirm-interaction">
+                                <i class="material-icons">remove</i>
+                            </button>
+
+                            <button id="DIG-upload-btn" class="btn add-btn" tabindex="6" data-brother="DIG-remove" data-type="DIG" data-ally="DIG">
+                                <i class="material-icons">add_photo_alternate</i>
+                            </button>
+                            <button id="DIG-remove-btn" class="btn remove-btn" data-brother="DIG-upload" tabindex="6" data-ally="DIG">
+                                <i class="material-icons">remove</i>
+                            </button>
+
+                            <button id="add-question-btn" class="btn" tabindex="7">
+                                <i class="material-icons">help</i>
+                            </button>
+                            <button id="submit-slide-btn" class="btn" tabindex="8">
+                                <i class="material-icons">done</i>
+                            </button>
+                            <button id="submit-and-add-slide-btn" class="btn" tabindex="8">
+                                <i class="material-icons">done_all</i>
+                            </button>
+                            <button id="show-more-btn" class="btn" tabindex="7">
+                                <i class="material-icons">keyboard_arrow_up</i>
+                            </button>
+                            <button id="hide-more-btn" class="btn" tabindex="7" style="display: none;">
+                                <i class="material-icons">keyboard_arrow_down</i>
+                            </button>
+                        </div>
+                        <div class="more-action-buttons" style="display: none;">
+                            <button id="insert-slide-before-btn" class="btn" tabindex="10">
+                                <i class="material-icons">keyboard_arrow_left</i>
+                                Insert Before
+                            </button>
+                            <button id="delete-slide-btn" class="btn btn-danger" tabindex="11">
+                                <i class="material-icons">delete</i>
+                                Delete Slide
+                            </button>
+                            <button id="insert-slide-after-btn" class="btn" tabindex="11">
+                                Insert After
+                                <i class="material-icons" style="float: right; margin-left: 12px; margin-right: 0;">keyboard_arrow_right</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 content-form" style="height: 0px; overflow: hidden; min-height: 0px;">
+                <div class="row" style="padding-top : 24px;">
+                    <div class="col-lg-12 shortcuts-div">
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="<b></b>" data-offset="4">B</button>
+                        <button title="Highlight" class="btn shortcut-btn" data-insert-text="<font color='#EE0000'></font>" data-offset="7">H</button>
+                        <button title="Formula" class="btn shortcut-btn" data-insert-text="<formula></formula>" data-offset="10">F</button>
+                        <button title="New Line" class="btn shortcut-btn" data-insert-text="<br>" data-offset="0">N</button>
+
+                        <div class="separator"></div>
+
+                        <button title="Square root" class="btn shortcut-btn" data-insert-text="\sqrt{x}" data-offset="0">&#x221a;</button>
+                        <button title="Cube root" class="btn shortcut-btn" data-insert-text="\sqrt[3]{x}" data-offset="0">&#8731;</button>
+                        <button title="Differentiation" class="btn shortcut-btn" data-insert-text="\cfrac{d}{dx} (x)" data-offset="0">&#8706;</button>
+
+                        <button title="Integration" class="btn shortcut-btn" data-insert-text="\int_{n}^{2n} (x)" data-offset="0">&int;</button>
+                        <button title="Summation" class="btn shortcut-btn" data-insert-text="\sum_{x \to y}^{x} (x)" data-offset="0">&Sigma;</button>
+                        <button title="Limit" class="btn shortcut-btn" data-insert-text="\lim_{x \to y} (x)" data-offset="0">&esdot;</button>
+
+                        <button title="Fraction" class="btn shortcut-btn" data-insert-text="\cfrac{a}{b}" data-offset="0">/</button>
+                        <button title="Matrix" class="btn shortcut-btn" data-insert-text="&#xa;\begin{matrix} &#xa; a & b \\ &#xa; c & d &#xa; \end{matrix} &#xa;" data-offset="0">[ ]</button>
+                        <button title="Proof" class="btn shortcut-btn" data-insert-text="&#xa;\begin{aligned} &#xa; f(x)&=x+1 \\ &#xa; \implies f(2)&=2+1 \\ &#xa; &=3 &#xa; \end{aligned}&#xa;" data-offset="0">P</button>
+
+                        <div class="separator"></div>
+
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="\pi" data-offset="0">&pi;</button>
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="\theta" data-offset="0">&theta;</button>
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="\delta" data-offset="0">&delta;</button>
+
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="\sigma" data-offset="0">&sigma;</button>
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="\lambda" data-offset="0">&lambda;</button>
+                        <button title="Bold" class="btn shortcut-btn" data-insert-text="\infty" data-offset="0">&infin;</button>
+                    </div>
+                    <div class="col-lg-12 rtb-div" style="padding: 0 0 12px 0;">
+                    </div>
+                </div>
+
+
+                <div style="margin-top: 10px;">
+
+                </div>
+                <div style="margin-top: 12px;">
+                    <button id="add-comment-btn" class="form-control">Add Comment</button>
+                    <textarea id="previous-comment-input" class="form-control" rows="6" disabled style="resize: none; padding: 6px 10px !important;">Shashank Goyal - 12 Feb &#13;&#10;&#13;&#10;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus dui quis blandit maximus. Duis feugiat tristique erat ut consectetur. In fermentum cursus suscipit. Fusce interdum eros vel justo porttitor lacinia. Quisque ultricies hendrerit lacus et rhoncus. Nunc porttitor sit amet mi quis tempus. Curabitur sed semper odio.</textarea>
+                    <textarea id="new-comment-input" class="form-control" rows="6" style="resize: none; display: none; padding: 6px 10px !important;">Comments</textarea>
+                </div>
+                <input id="DIG-input" type="file" class="form-control" onchange="previewFile()" style="display: none;">
+
+                <div style="margin-top: 10px;">
+                    <p style="font-family: 'Inconsolata', monospace; margin: 0px;"><b>Created By : </b>Shashank Goyal [10:40 - 12 Feb, 2019]</p>
+                    <p style="font-family: 'Inconsolata', monospace; margin: 0px;"><b>Reviewed By : </b>Dr. Ashok Bhansali [10:40 - 12 Feb, 2019], Vijay Awasthi  [10:40 - 12 Feb, 2019]</p>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/katex.js" ></script>
+        <script type="text/javascript" src="js/server-request.js" ></script>
+        <script type="text/javascript" src="js/initialise.js" ></script>
+        <script type="text/javascript" src="js/common.js" ></script>
+        <script type="text/javascript" src="js/manageSlides.js" ></script>
+        <script type="text/javascript" src="js/jsdiff.js" ></script>
+        <script type="text/javascript">
+            $(".preface").click(function(e){
+                $(".preface").removeClass("active");
+                $(".explanation").removeClass("active");
+                $(this).addClass("active");
+
+                $("#preface-input-div").show();
+                $("#explanation-input-div").hide();
+                $("#preface-input").focus();
+
+                e.stopPropagation();
+            });
+
+            $(".explanation").click(function(e){
+                $(".preface").removeClass("active");
+                $(".explanation").removeClass("active");
+                $(this).addClass("active");
+
+                $("#preface-input-div").hide();
+                $("#explanation-input-div").show();
+                $("#explanation-input").focus();
+
+                e.stopPropagation();
+            });
+
+            $("#show-more-btn").click(function(){
+                $(this).hide();
+                $("#hide-more-btn").show();
+                $(".more-action-buttons").show();
+            });
+
+            $("#hide-more-btn").click(function(){
+                $(this).hide();
+                $("#show-more-btn").show();
+                $(".more-action-buttons").hide();
+            });
+
+            $(".device-screen").click(function(e) {
+                $("#preface-input-div").hide();
+                $("#explanation-input-div").hide();
+            });
+        </script>
+   </body>
+</html>

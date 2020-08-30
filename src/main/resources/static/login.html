@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QED Admin - Login</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <div class="qed-universal-nav">
+        <div class="qed-logo">
+            QED
+        </div>
+    </div>
+    <div class="row" style="padding: 0 15%;">
+        <div class="col-6 login-form">
+            <div>
+                <p id="form-heading" class="form-heading">Log in to QED</p>
+
+                <p style="line-height: 0.1; margin-top: 3rem;">Need Help? <span class="qed-link">Contact the QED Helpdesk</span></p>
+
+                <p style="line-height: 0.1; margin-top: 3rem;">Don't have QED?</p>
+                <p class="qed-link">Talk to a representative</p>
+            </div>
+        </div>
+        <div id="password-reset-form" class="col-6 login-form" style="display: none;">
+            <label class="qed-input-label">
+                <span>LoginID</span>
+                <span id="sign-in-link" class="qed-link forgot-password">Sign in</span>
+            </label>
+            <input id="reset-username" class="qed-input" type="text" />
+
+            <div id="success-notification-div" style="display: none;">
+                <i class="material-icons" style="line-height: 2; float: left; color: #24a148;">check_circle_outline</i>
+                <span id="success-notification" class="error-notification" style="color: #24a148;">Reset link sent. Check registered email account.</span>
+            </div>
+            <div id="reset-error-notification-div" style="display: none;">
+                <i class="material-icons" style="line-height: 2; float: left; color: #da1e28;">error_outline</i>
+                <span id="reset-error-notification" class="error-notification">LoginID is required.</span>
+            </div>
+            <div>
+                <button id="continue" class="login-btn">
+                    Continue
+                </button>
+            </div>
+        </div>
+        <div id="login-form" class="col-6 login-form">
+            <label class="qed-input-label">LoginID</label>
+            <input id="username" class="qed-input" type="text" />
+            <label class="qed-input-label">
+                <span>Password</span>
+                <span id="forgot-password-link" class="qed-link forgot-password">Forgot Password?</span>
+            </label>
+            <div>
+                <i id="show-password-btn" class="material-icons show-password">remove_red_eye</i>
+                <input id="password" class="qed-input" type="password" />
+            </div>
+            <div id="error-notification-div" style="display: none;">
+                <i class="material-icons" style="line-height: 2; float: left; color: #da1e28;">error_outline</i>
+                <span id="error-notification" class="error-notification">This is an error notification.</span>
+            </div>
+            <div>
+                <button id="submit" class="login-btn">
+                    Log in
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span>Contact Us</span>
+        <span>Terms of Use</span>
+    </footer>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+
+    <script>
+        var showPass = false;
+        $("#show-password-btn").click(function() {
+            if(showPass) {
+                $("#password").attr("type", "text");
+                $(this).addClass("qed-link");
+                showPass = false;
+            }
+            else {
+                $("#password").attr("type", "password");
+                $(this).removeClass("qed-link");
+                showPass = true;
+            }
+        });
+
+        $(document).ready(function() {
+            if(hasAccessToken()) {
+                sendUserDetailRequest({success : function () {
+                    var role = localStorage.getItem("role");
+                    console.log(role);
+
+                    if(role === "ROLE_SUPER_ADMIN") {
+                        window.location.href = '/users.html';
+                    }
+                    else if(role === "ROLE_SUBJECT_EXPERT") {
+                        window.location.href = '/lessons.html';
+                    }
+                    else if(role === "ROLE_CONTRIBUTOR") {
+                        window.location.href = '/lessons.html';
+                    }
+                }});
+            }
+        });
+
+        $("#password").keypress(function (e) {
+            var key = e.which;
+            if(key == 13) {
+                console.log("Enter Key Pressed");
+                login();
+                return false;
+            }
+        });
+
+        function login() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            if(username == "" || password == "") {
+                $("#error-notification").html("LoginID and password required");
+                $("#error-notification-div").show();
+            }
+            else {
+                sendTokenRequest(username, password, function(data) {
+                    sendUserDetailRequest({success : function (data) {
+                        var role = localStorage.getItem("role");
+
+                        if(role === "ROLE_SUPER_ADMIN") {
+                            window.location.href = '/users.html';
+                        }
+                        else if(role === "ROLE_SUBJECT_EXPERT") {
+                            window.location.href = '/lessons.html';
+                        }
+                        else if(role === "ROLE_CONTRIBUTOR") {
+                            window.location.href = '/lessons.html';
+                        }
+                    }});
+                });
+            }
+        }
+
+        $("#submit").click(login);
+
+        $("#forgot-password-link").click(function() {
+            $("#login-form").fadeOut(300, "linear", function() {
+                $("#form-heading").html("Reset Password");
+                $("#password-reset-form").fadeIn(500, "linear");
+            });
+        });
+
+        $("#sign-in-link").click(function() {
+            $("#password-reset-form").fadeOut(300, "linear", function() {
+                $("#form-heading").html("Log in to QED");
+                $("#login-form").fadeIn(500, "linear");
+            });
+        });
+
+        $("#continue").click(function() {
+            var username = $("#reset-username").val();
+
+            if(username != "") {
+                $("#success-notification-div").show();
+                $("#reset-error-notification-div").hide();
+            }
+            else {
+                $("#reset-error-notification-div").show();
+                $("#success-notification-div").hide();
+            }
+        });
+    </script>
+</body>
+</html>

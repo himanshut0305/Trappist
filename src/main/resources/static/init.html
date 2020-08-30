@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QED - Init</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+        .btn {
+            width: 100%;
+            margin: 6px;
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+    <div class="row">
+        <div class="col-4 offset-4">
+            <button id="init-btn" class="btn">Initialize</button>
+            <button id="init-test-data-btn" class="btn">Add Data</button>
+            <button id="init-more-test-data-btn" class="btn">Add More Data</button>
+            <button id="init-more-test-data2-btn" class="btn">More More Data</button>
+        </div>
+    </div>
+    <div class="row">
+        <p id="response" class="col-4 offset-4" style="color: green; font-family: 'Inconsolata', monospace; font-size: 30px;"></p>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script>
+        $("#init-btn").click(function() {
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json; charset=UTF-8",
+                url: '/api/auth/init',
+                success: function(response) {
+                    console.log(response);
+                    $("#response").html(response);
+                },
+                error: function(xhr, exception) {
+                    console.log(xhr.responseJSON.message);
+                    $("#response").html(xhr.responseJSON.message);
+                }
+            });
+        });
+
+        $("#init-test-data-btn").click(function() {
+            sendAuthorisedRequest({
+                url:"/api/init/testData",
+                onSuccess : function(response){
+                    console.log(response);
+                },
+                onError:function(error){
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#init-more-test-data2-btn").click(function() {
+            sendAuthorisedRequest({
+                url:"/api/init/testData2",
+                onSuccess : function(response){
+                    console.log(response);
+                },
+                onError:function(error){
+                    console.log(error);
+                }
+            });
+        });
+
+        $("#init-more-test-data-btn").click(function() {
+            sendAuthorisedRequest({
+                url:"/api/init/moreTestData",
+                onSuccess : function(response){
+                    console.log(response);
+                },
+                onError:function(error){
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

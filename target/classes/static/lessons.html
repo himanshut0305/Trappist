@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>QED Admin - Lessons</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/lesson.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+</head>
+<body style="background: #f3f3f3">
+    <div id="header" style="box-shadow: 0 0 5px 0 gray;"></div>
+    <div id="current-sub-module-name"></div>
+    <div class="qed-sub-menu-item">
+        <div id="home-mi" class="active-sub-menu-item" data-name="Home" data-ally="workspace-init"><i class="material-icons">home</i></div>
+        <div id="metadata-mi" data-name="Metadata" data-ally="manage-chapters"><i class="material-icons">insert_link</i></div>
+        <div id="books-mi" data-name="Books" data-ally="manage-books"><i class="material-icons">book</i></div>
+
+        <div id="slides-mi" data-name="Slides" data-ally="manage-slides"><i class="material-icons">slideshow</i></div>
+        <div id="questions-mi" data-name="Questions" data-ally="manage-questions"><i class="material-icons">live_help</i></div>
+        <div id="review-mi" data-name="Review" data-ally="review-slides"><i class="material-icons">done_all</i></div>
+    </div>
+    <div id="workspace-label" class="workspace-label"></div>
+
+    <div class="qed-main-content">
+        <div id="workspace-init-div" class="main-content row">
+            <h4 class="col-lg-5 col-md-9 col-sm-12 clear">Hi! Welcome To QED Content Management Module. You can now build your Workspace by selecting the Subject Group, Subject and Class</h4>
+            <div class="col-lg-7 col-md-3 col-sm-12"></div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <label class="qed-input-label">
+                    <span>Select Group</span>
+                </label>
+                <select id="subject-group-select" class="qed-input open w-name-var">
+                    <option value="0" disabled selected>Choose Subject Group</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <label class="qed-input-label">
+                    <span>Select Subject</span>
+                </label>
+                <select id="subject-select" disabled class="qed-input open w-name-var">
+                    <option value="0" disabled selected>Select Subject</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <label class="qed-input-label">
+                    <span>Select Class</span>
+                </label>
+                <select id="school-year-select" class="qed-input open w-name-var">
+                    <option value="0" disabled selected>Select Class</option>
+                </select>
+            </div>
+            <div class="col-12" style="margin-top: 24px;">
+                <button id="build-workspace-btn" class="qed-btn" disabled style="width: 120px;">Build</button>
+            </div>
+        </div>
+        <div id="manage-chapters-div" class="main-content row" style="display: none;">
+            <div class="col-lg-4">
+                <h4>Initialize Workspace</h4>
+                <label class="qed-input-label">
+                    <span>Select Book</span>
+                </label>
+                <select id="book-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Book</option>
+                </select>
+                <label class="qed-input-label">
+                    <span>Select Chapter</span>
+                </label>
+                <select id="book-chapter-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Book Chapter</option>
+                </select>
+                <label class="qed-input-label">
+                    <span>Select Topic</span>
+                </label>
+                <select id="book-topic-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Book Topic</option>
+                </select>
+                <button id="create-slide-btn" class="qed-btn" style="margin-top: 24px;">Create Slides</button>
+                <button id="add-reference-book-btn" class="qed-btn" style="margin-top: 24px;">Add Reference Book</button>
+            </div>
+            <div class="col-lg-4" style="display: none;">
+                <h4 style="color: transparent;">|</h4>
+                <label class="qed-input-label">
+                    <span>Select Reference Book</span>
+                </label>
+                <select id="reference-book-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Book</option>
+                </select>
+                <label class="qed-input-label">
+                    <span>Select Reference Chapter</span>
+                </label>
+                <select id="reference-book-chapter-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Book Chapter</option>
+                </select>
+                <label class="qed-input-label">
+                    <span>Select Reference Topic</span>
+                </label>
+                <select id="reference-book-topic-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Book Topic</option>
+                </select>
+            </div>
+        </div>
+        <div id="manage-questions-div" class="main-content row" style="display: none;">
+            <div class="col-lg-4">
+                <h4>Add Questions</h4>
+                <label class="qed-input-label">
+                    <span>Select Chapter</span>
+                </label>
+                <select id="chapter-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Chapter</option>
+                </select>
+                <label class="qed-input-label">
+                    <span>Select Topic</span>
+                </label>
+                <select id="topic-select" class="qed-input open" disabled>
+                    <option value="0" disabled selected>Select Topic</option>
+                </select>
+                <button id="add-questions-btn" class="qed-btn" style="margin-top: 24px;">Add Questions</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/datatable.js"></script>
+    <script type="text/javascript" src="js/lesson.js"></script>
+    <script type="text/javascript" src="js/manageLessonsNew.js"></script>
+</body>
+</html>

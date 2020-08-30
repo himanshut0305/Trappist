@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+    <style>
+        body {
+            overflow: hidden;
+            background: #f3f3f3;
+            text-align: center;
+            font-family: "IBM Plex Sans";
+        }
+        .error {
+            color: #454545;
+            margin-top: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="qed-universal-nav" style="box-shadow: 0 0 5px 0 grey;">
+        <div class="qed-logo">
+            QED
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12 offset-lg-3 offset-md-2">
+            <h3 id="error-heading" class="error">Access Denied</h3>
+            <h5 id="error">You do not have valid credentials to access the page that you requested</h5>
+            <button id="homepage-btn" class="qed-btn" style="width: 150px; margin-top: 24px;">Go to homepage</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var error = getURLParameter("error");
+
+            if(error === "401") {
+                $("#error-heading").html("Access Denied");
+                $("#error").html("You do not have valid credentials to access the requested URL");
+            }
+            else {
+                $("#error-heading").html("Page Not Found");
+                $("#error").html("The requested URL was not found on this server");
+            }
+        });
+
+        var getURLParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+
+        $("#homepage-btn").click(function() {
+            window.location.href = '/login.html';
+        });
+    </script>
+</body>
+</html>

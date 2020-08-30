@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>QED Admin - Manage Schools</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+    <div class="row">
+        <div class="col-4 form-div">
+            <h5>Manage Schools</h5>
+
+            <table width="100%" class="form-table">
+                <tr style="height: 45px;">
+                    <td class="label">Board</td>
+                    <td>
+                        <select id="school-board-select" class="form-control">
+                            <option value="0" selected disabled>Select Board</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Group</td>
+                    <td>
+                        <select id="school-chain-select" class="form-control">
+                            <option value="0" selected disabled>Select School Group</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Name</td>
+                    <td><input id="school-name" type="text" class="form-control" /></td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Alias</td>
+                    <td><input id="school-alias" type="text" class="form-control" /></td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Code</td>
+                    <td><input id="school-code" type="text" class="form-control" maxlength="6" /></td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Theme</td>
+                    <td>
+                        <select id="school-theme-select" class="form-control">
+                            <option selected value="RED">RED</option>
+                            <option selected value="BLUE">BLUE</option>
+                            <option selected value="GREEN">GREEN</option>
+                            <option selected value="ORANGE">ORANGE</option>
+                            <option selected value="INDIGO">INDIGO</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">School Logo</td>
+                    <td>
+                        <button id="school-logo-upload-btn" class="btn">UPLOAD</button>
+                        <img id="school-logo-preview" src="" />
+                    </td>
+                </tr>
+            </table>
+
+            <input id="school-logo-input" type="file" class="form-control" onchange="previewFile()" style="display: none;">
+
+            <button id="submit" class="btn float-right form-btn">Create</button>
+            <button id="cancel-edit-btn" class="btn float-right form-btn" style="display: none;">Cancel</button>
+            <button id="update" class="btn float-right form-btn" style="display: none;">Update</button>
+        </div>
+        <div class="col-8 table-div">
+            <table id="school-board-table" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Alias</th>
+                    <th>Code</th>
+                    <th>Theme</th>
+                    <th width="6%"></th>
+                    <th width="6%"></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/school.js" ></script>
+    <script type="text/javascript" src="js/datatable.js"></script>
+</body>
+</html>

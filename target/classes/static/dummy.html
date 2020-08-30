@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QED</title>
+</head>
+<body>
+    <button id="submit-a">Submit A</button>
+    <button id="submit-b">Submit B</button>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+
+    <script>
+        x = {
+            aInternal: 10,
+            bInternal: 50,
+            aListener: function(val) {},
+            bListener: function(val) {},
+            set a(val) {
+                this.aInternal = val;
+                this.aListener(val);
+            },
+            set b(val) {
+                this.bInternal = val;
+                this.bListener(val);
+            },
+            get a() {
+                return this.aInternal;
+            },
+            get b() {
+                return this.bInternal;
+            },
+            registerAListener: function(listener) {
+                this.aListener = listener;
+            },
+            registerBListener: function(listener) {
+                this.bListener = listener;
+            }
+        }
+
+        x.registerAListener(function(val) {
+            alert("Someone changed the value of x.a to " + val);
+        });
+
+        x.registerBListener(function(val) {
+            alert("Someone changed the value of x.b to " + val);
+        });
+
+        $("#submit-a").click(function() {
+            x.a = x.a + 1;
+        });
+
+        $("#submit-b").click(function() {
+            x.b = x.b + 1;
+        });
+    </script>
+</body>
+</html>

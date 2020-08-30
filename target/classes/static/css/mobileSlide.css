@@ -1,0 +1,95 @@
+.preview {
+    height: calc(100vh - 48px);
+    width: 100%;
+    padding: 0px;
+}
+
+.device {
+    width: 100%;
+    margin: 0px;
+    background: none;
+    padding: 0px;
+    height: 100%;
+}
+
+.device-screen {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    background: #fff;
+    position: relative;
+}
+
+.action-buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #333;
+    z-index: 10;
+    padding-top: 2px;
+}
+
+.action-buttons > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.first-action-buttons .btn {
+    border-radius: 0px;
+    text-align: center;
+    height: 3rem;
+    font-weight: bold;
+    width: 12%;
+    margin: 0px !important;
+    padding: 0;
+    align-items: center;
+}
+
+.more-action-buttons { margin-top: 2px; }
+.more-action-buttons .btn {
+    border-radius: 0px;
+    text-align: center;
+    height: 3rem;
+    font-weight: bold;
+    width: 32.8%;
+    margin: 0px !important;
+    padding: 0;
+    align-items: center;
+}
+
+.first-action-buttons .btn .material-icons {
+    margin-right: 0px;
+    width: 100%;
+}
+
+.explanation {
+    width: 100%;
+    min-height: 3rem;
+    background: #f4f4f8;
+    font-size: 0.9rem;
+}
+
+.preface {
+    padding: 12px;
+    width: 100%;
+    min-height: 3rem;
+    font-size: 0.9rem;
+    margin: 12px auto;
+    border-radius: 5px;
+    background: #f4f4f8;
+}
+
+.input-div {
+    background: white;
+    position: absolute;
+    bottom: 0rem;
+    padding: 12px 18px;
+    display: none;
+    z-index: 100;
+    background: #efefe8;
+}
+
+.input-div .form-control {
+    box-shadow: none !important;
+}

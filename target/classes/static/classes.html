@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QED - Manage Classes</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+    <style>
+        .label { padding-right: 24px; }
+        .details-control { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <div class="row">
+        <div class="col-4 form-div">
+            <h5>Manage Classes</h5>
+
+            <table width="100%" class="form-table">
+                <tr style="height: 45px;">
+                    <td class="label">Board</td>
+                    <td>
+                        <select id="school-board-select" class="form-control">
+                            <option value="0" selected disabled>Select Board</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Group</td>
+                    <td>
+                        <select id="school-chain-select" class="form-control">
+                            <option value="0" selected disabled>Select School Group</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">School</td>
+                    <td>
+                        <select id="school-select" class="form-control">
+                            <option value="0" selected disabled>Select School </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Year</td>
+                    <td>
+                        <select id="school-year-select" class="form-control">
+                            <option value="0" selected disabled>Select School Year</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td class="label">Section</td>
+                    <td>
+                        <input id="from-section" type="text" placeholder="From" class="form-control" maxlength="1" oninput="this.value = this.value.toUpperCase()" style="width: 49%; float: left;">
+                        <input id="to-section" type="text" placeholder="To" class="form-control" maxlength="1" oninput="this.value = this.value.toUpperCase()" style="width: 49%; float: right;">
+                    </td>
+                </tr>
+            </table>
+
+            <input id="school-logo-input" type="file" class="form-control" onchange="previewFile()" style="display: none;">
+
+            <button id="submit" class="btn float-right form-btn">Create</button>
+            <button id="cancel-edit-btn" class="btn float-right form-btn" style="display: none;">Cancel</button>
+            <button id="update" class="btn float-right form-btn" style="display: none;">Update</button>
+        </div>
+        <div class="col-8 table-div">
+            <table id="school-classes-table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th width="10%">Class</th>
+                        <th>Configured</th>
+                        <th width="6%"></th>
+                        <th width="6%"></th>
+                        <th width="6%"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/classes.js" ></script>
+    <script type="text/javascript" src="js/datatable.js"></script>
+    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
+</body>
+</html>

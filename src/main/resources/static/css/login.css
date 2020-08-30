@@ -1,0 +1,103 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.left-padding { padding: 0 20% 0 0; }
+.right-padding { padding: 0 0 0 20%; }
+
+footer {
+    height: 50px;
+    background-color: #f4f4f4;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 0 20px;
+    color: #5a5a5a;
+    font-family: 'IBM Plex Sans';
+    line-height: 3;
+}
+
+.form-heading {
+    font-size: 1.875rem;
+    font-family: 'IBM Plex Sans';
+}
+
+.forgot-password {
+    float: right;
+}
+
+.qed-link {
+    color: #1268fb !important;
+    cursor: pointer;
+}
+
+.qed-link:hover {
+    color: #0c49c1 !important;
+}
+
+.login-btn {
+    width : 40%;
+    float: right;
+    margin-top: 30px;
+    background-color: #0062ff;
+    border-color: #0062ff;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    line-height: 20px;
+    height: 2.75rem;
+    cursor: pointer;
+    box-shadow: 0px;
+}
+
+.login-btn:hover { background: #0c49c1; }
+.login-btn:active { background: #f4f4f4; color: #5a5a5a; }
+
+
+footer span {
+    margin-right: 1.75rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+footer span:hover {
+    color: #1268fb;
+}
+
+.show-password {
+    position: absolute;
+    height: 1.65em;
+    float: right;
+    right: 15px;
+    width: 2.4em;
+    text-align: center;
+    line-height: 1.75 !important;
+    cursor: pointer;
+    color: #5a5a5a;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.show-password:hover {
+    color: #1268fb;
+}
+
+.error-notification {
+    line-height: 3;
+    margin-left: 12px;
+    font-family: 'IBM Plex Sans';
+    color: #da1e28;
+}
+
+.qed-input-label {
+    font-weight: 400 !important;
+}

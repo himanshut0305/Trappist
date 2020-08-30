@@ -1,0 +1,42 @@
+.show-questions-overlay-div {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background: #eaeaea;
+    display: none;
+    padding-bottom: 12px;
+}
+
+.questions-list {
+    padding: 24px 48px;
+}
+
+.questions-list > div {
+    margin: 12px;
+}
+
+.questions-list > div:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+.close-questions-list-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+}
+
+#topic-select {
+    background: transparent;
+    color: white;
+    border: none;
+    margin-top: -8px;
+    outline: none;
+}
+
+#topic-select option {
+    color: black;
+}

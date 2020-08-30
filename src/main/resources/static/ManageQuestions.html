@@ -1,0 +1,183 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QED Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet" href="css/katex.css">
+    <link rel="stylesheet" href="css/manageQuestions.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+<div id="notification" class="slide-notification alert alert-danger" style="display: none;">
+    <p id="notification-heading" class="notification-heading">Notification</p>
+    <p id="notification-text" class="notification-text"></p>
+</div>
+<div class="row header">
+    <div class="col-12" style="text-align: center; display: flex; flex-direction: row; justify-content: space-between; padding: 0px;">
+        <div id="previous-slide-btn" class="navigation-btn" tabindex="10">
+            <i class="material-icons" style="float: left; line-height: 1.4; margin-right: 15px;">arrow_back</i>
+            Previous Slide
+        </div>
+        <p><span id="topic-name"></span> - Slide <span id="slide-index"></span></p>
+        <div id="next-slide-btn" class="navigation-btn" tabindex="10">
+            Next Slide
+            <i class="material-icons" style="float: right; line-height: 1.4; margin-left: 15px;">arrow_forward</i>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 content-form">
+        <div class="row" style="padding-top : 24px;">
+            <div class="col-lg-12 shortcuts-div">
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="<b></b>" data-offset="4">B</button>
+                <button title="Highlight" class="btn shortcut-btn" data-insert-text="<font color='#EE0000'></font>" data-offset="7">H</button>
+                <button title="Formula" class="btn shortcut-btn" data-insert-text="<formula></formula>" data-offset="10">F</button>
+                <button title="New Line" class="btn shortcut-btn" data-insert-text="<br>" data-offset="0">N</button>
+
+                <div class="separator"></div>
+
+                <button title="Square root" class="btn shortcut-btn" data-insert-text="\sqrt{x}" data-offset="0">&#x221a;</button>
+                <button title="Cube root" class="btn shortcut-btn" data-insert-text="\sqrt[3]{x}" data-offset="0">&#8731;</button>
+                <button title="Differentiation" class="btn shortcut-btn" data-insert-text="\cfrac{d}{dx} (x)" data-offset="0">&#8706;</button>
+
+                <button title="Integration" class="btn shortcut-btn" data-insert-text="\int_{n}^{2n} (x)" data-offset="0">&int;</button>
+                <button title="Summation" class="btn shortcut-btn" data-insert-text="\sum_{x \to y}^{x} (x)" data-offset="0">&Sigma;</button>
+                <button title="Limit" class="btn shortcut-btn" data-insert-text="\lim_{x \to y} (x)" data-offset="0">&esdot;</button>
+
+                <button title="Fraction" class="btn shortcut-btn" data-insert-text="\cfrac{a}{b}" data-offset="0">/</button>
+                <button title="Multiplication" class="btn shortcut-btn" data-insert-text="\times" data-offset="0">&times;</button>
+                <button title="Implies that" class="btn shortcut-btn" data-insert-text="\implies" data-offset="0">&rArr;</button>
+
+                <button title="Matrix" class="btn shortcut-btn" data-insert-text="&#xa;\begin{matrix} &#xa; a & b \\ &#xa; c & d &#xa; \end{matrix} &#xa;" data-offset="0">[ ]</button>
+                <button title="Proof" class="btn shortcut-btn" data-insert-text="&#xa;\begin{aligned} &#xa; f(x)&=x+1 \\ &#xa; \implies f(2)&=2+1 \\ &#xa; &=3 &#xa; \end{aligned}&#xa;" data-offset="0">P</button>
+
+                <div class="separator"></div>
+
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\pi" data-offset="0">&pi;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\theta" data-offset="0">&theta;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\delta" data-offset="0">&delta;</button>
+
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\sigma" data-offset="0">&sigma;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\lambda" data-offset="0">&lambda;</button>
+                <button title="Bold" class="btn shortcut-btn" data-insert-text="\infty" data-offset="0">&infin;</button>
+            </div>
+            <div class="col-lg-12 rtb-div" style="padding: 0 0 12px 0;">
+                <textarea id="rich-text-box" class="form-control rich-text-box" tabindex="1" rows="8" style="resize: none;">Question</textarea>
+            </div>
+        </div>
+        <div id="options-div" class="options-div">
+            <input id="option-input" type='text' class="form-control option-input" tabindex="2" disabled placeholder="Option" />
+
+            <button id="option-remove-btn" class="btn option-action-btn" tabindex="5" disabled title="Remove Option"><i class="material-icons">remove</i></button>
+            <button id="add-option-explanation-btn" class="btn option-action-btn" tabindex="4" disabled title="Show Explanation"><i class="material-icons">playlist_add</i></button>
+            <button id="hide-option-explanation-btn" class="btn option-action-btn" tabindex="4" title="Hide Explanation" style="display: none;"><i class="material-icons">remove_circle_outline</i></button>
+
+            <button id="mark-option-correct-btn" class="btn option-action-btn" tabindex="3" disabled title="Mark as Correct"><i class="material-icons">check</i></button>
+            <button id="unmark-option-correct-btn" class="btn option-action-btn"  tabindex="3" title="Un-mark as Correct" style="display: none;"><i class="material-icons">clear</i></button>
+        </div>
+
+        <button id="add-option-btn" class="btn" tabindex="6">
+            <i class="material-icons">add</i>
+            Add Option
+        </button>
+
+        <button id="add-diagram-btn" class="btn" tabindex="7">
+            <i class="material-icons">add_photo_alternate</i>
+            Add Diagram
+        </button>
+        <button id="remove-diagram-btn" class="btn" tabindex="7" style="display: none;">
+            <i class="material-icons">remove</i>
+            Remove Diagram
+        </button>
+
+        <select id="question-type-select" class="form-control" tabindex="8" style="display: inline-block; width: auto;">
+            <option value="MCQ_Single_Answer" selected>MCQ Single Correct Answer</option>
+            <option value="MCQ_Multiple_Answer">MCQ Multiple Correct Answer</option>
+            <option value="MCQ_True_False">True False</option>
+            <option value="One_Word_Answer">One Word</option>
+        </select>
+
+        <button id="enable-all-select" class="btn btn-outline-dark">Enable All Select</button>
+        <button id="disable-all-select" class="btn btn-primary" style="display: none;">Disable All Select</button>
+
+        <button id="submit-slide-btn" class="waiter-btn-blue btn btn-primary" tabindex="9" style="width: 150px; float: right;">
+            Submit
+        </button>
+        <div style="margin-top: 10px; height: 34px;">
+            <button id="insert-slide-before-btn" class="waiter-btn-grey btn" tabindex="10" style="float: left;">
+                <i class="material-icons">keyboard_arrow_left</i>
+                Insert Slide Before
+            </button>
+
+            <button id="insert-slide-after-btn" class="waiter-btn-grey btn" tabindex="11" style="margin-left: 4px; float: left;">
+                Insert Slide After
+                <i class="material-icons" style="float: right; margin-left: 12px; margin-right: 0;">keyboard_arrow_right</i>
+            </button>
+            <select id="skip-to-slide" class="form-control" style="width: 120px; margin-left: 4px; float: left; margin-bottom: 12px;">
+                <option>Skip to Slide</option>
+            </select>
+
+            <button id="delete-slide-btn" class="waiter-btn-red btn btn-danger" tabindex="11" style="float: right; margin-left: 4px; width: 50px; font-weight: bold;">
+                <i class="material-icons">delete</i>
+            </button>
+            <button id="finish-topic-btn" class="btn btn-danger" tabindex="10" style="color: white; float: right; margin: auto; width: 150px; font-weight: bold;">
+                <i class="material-icons">last_page</i>
+                Finish Topic
+            </button>
+        </div>
+
+        <div style="margin-top: 12px;">
+            <button id="add-comment-btn" class="form-control">See Comments</button>
+            <p id="previous-comment-input" class="form-control" style=" display: none; resize: none; padding: 6px 10px !important; height: 140px; background: #f6f6f8; overflow-y: auto;"></p>
+            <textarea id="new-comment-input" class="form-control" rows="6" style="resize: none; padding: 6px 10px !important;"></textarea>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <p style="font-family: 'Inconsolata', monospace; margin: 0px;"><b>Created By : </b><span id="creator-name"></span></p>
+            <p style="font-family: 'Inconsolata', monospace; margin: 0px;"><b>Last Reviewed By : </b><span id="reviewer-name"></span></p>
+        </div>
+        <input id="diagram-input" type="file" class="form-control" onchange="previewFile()" style="display: none;">
+    </div>
+    <div class="col-lg-4 preview">
+        <div class="device">
+            <div id="device-screen" class="device-screen">
+                <div class="progress-bar"></div>
+                <div class="progress-bar-overlay"></div>
+
+                <div style="max-height: 140px; overflow: auto;">
+                    <div id="question-preview-div" class="preface" style="cursor: pointer; padding: 1px;">
+                        <p id="question-preview"></p>
+                    </div>
+                    <div id="diagram-div" style="display: none;">
+                        <div id="preview-div" style="height: 180px; width: 100%; padding : 12px;">
+                            <img id="preview" src="" accept="image/gif, image/jpeg, image/png" style="max-height: 100%; width: auto; max-width: 100%; margin: auto;">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="instruction-preview-div" class="preface" style="">
+                    <p id="instruction-preview" contenteditable="true">Select any one of the option</p>
+                </div>
+                <div id="options-preview-div" style="height: 224px; overflow-y: auto;"></div>
+                <button class="btn continue">CONTINUE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/katex.js" ></script>
+<script type="text/javascript" src="js/server-request.js" ></script>
+<script type="text/javascript" src="js/initialise.js" ></script>
+<script type="text/javascript" src="js/common.js" ></script>
+<script type="text/javascript" src="js/manageQuestions.js" ></script>
+</body>
+</html>

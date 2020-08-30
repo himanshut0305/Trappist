@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>QED Admin - Lessons</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/toc.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gugi|IBM+Plex+Sans|Inconsolata|Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+
+    <div id="book-topic-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 45vh; margin-top: 24vh;">
+            <div class="col-4 offset-4 card create-form" style="padding: 20px;">
+                <h3>Create Topic for Book</h3>
+                <input type="text" id="book-topic-name-input" class="form-control" placeholder="Name">
+                <input type="number" id="book-topic-index-input" class="form-control" placeholder="Index" min="1" max="30">
+
+                <button id="create-book-topic-btn" class="btn">Create</button>
+
+                <p id="topic-error-notification" style="color: red"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="book-chapter-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 45vh; margin-top: 24vh;">
+            <div class="col-4 offset-4 card create-form" style="padding: 20px;">
+                <h3>Create Chapter for Book</h3>
+                <input type="text" id="book-chapter-name-input" class="form-control" placeholder="Name">
+                <input type="number" id="book-chapter-index-input" class="form-control" placeholder="Index" min="1" max="30">
+
+                <button id="create-book-chapter-btn" class="btn">Create</button>
+
+                <p id="chapter-error-notification" style="color: red"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="book-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 30vh; margin-top: 24vh;">
+            <div class="col-4 offset-4 card create-form" style="padding: 20px;">
+                <h3>Create Book</h3>
+                <input type="text" id="book-name-input" class="form-control" placeholder="Name">
+
+                <button id="create-book-btn" class="btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chapter-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 30vh; margin-top: 24vh;">
+            <div class="col-4 offset-4 card create-form" style="padding: 20px;">
+                <h3>Create Chapter</h3>
+                <input type="text" id="chapter-name-input" class="form-control" placeholder="Name">
+
+                <button id="create-chapter-btn" class="btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="topic-overlay" class="overlay" style="display: none;">
+        <div class="row" style="height: 30vh; margin-top: 24vh;">
+            <div class="col-4 offset-4 card create-form" style="padding: 20px;">
+                <h3>Create Topic</h3>
+                <input type="text" id="topic-name-input" class="form-control" placeholder="Name">
+
+                <button id="create-topic-btn" class="btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3 form-div">
+            <h5>Create Lesson</h5>
+
+            <table width="100%" class="form-table">
+                <tr>
+                    <td style="height: 45px;">
+                        <select id="subject-group-select" class="form-control">
+                            <option value="0" disabled selected>Select Group</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td>
+                        <select id="subject-select" disabled class="form-control">
+                            <option value="0" disabled selected>Select Subject</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td>
+                        <select id="chapter-select" disabled class="form-control">
+                            <option value="0" disabled selected>Select Chapter</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr style="height: 45px;">
+                    <td>
+                        <select id="topic-select" disabled class="form-control">
+                            <option value="0" disabled selected>Select Reference Topic</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-3 form-div">
+            <h5 style="color: white;">|</h5>
+            <table width="100%" class="form-table">
+                <tr>
+                    <td style="height: 45px;">
+                        <select id="school-year-select" class="form-control">
+                            <option value="0" disabled selected>Select Class</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 45px;">
+                        <select id="book-select" class="form-control" disabled>
+                            <option value="0" disabled selected>Select Book</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 45px;">
+                        <select id="book-chapter-select" class="form-control" disabled>
+                            <option value="0" disabled selected>Select Book Chapter</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 45px;">
+                        <select id="book-topic-select" class="form-control" disabled>
+                            <option value="0" disabled selected>Select Book Topic</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button id="create-slide-btn" class="btn float-right form-btn">Create</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>\
+    <script type="text/javascript" src="js/server-request.js" ></script>
+    <script type="text/javascript" src="js/initialise.js" ></script>
+    <script type="text/javascript" src="js/datatable.js"></script>
+    <script type="text/javascript" src="js/manageLessons.js"></script>
+</body>
+</html>
